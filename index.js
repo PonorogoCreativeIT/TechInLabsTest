@@ -1,7 +1,19 @@
-/** @format */
+//import liraries
+import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
+import { routes } from './src/routes';
+routes();
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
-
-AppRegistry.registerComponent(appName, () => App);
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [{
+          component: {
+            name: 'SplashScreen',
+          }
+        }],
+      }
+    }
+  });
+});
