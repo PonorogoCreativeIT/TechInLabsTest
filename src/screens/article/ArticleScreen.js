@@ -96,17 +96,16 @@ class ArticleScreen extends Component {
   renderRow(data){
     const item = data.item;
     const index = data.index;
-    let imageUrl;
+    let imageUrl = null;
     if(item.multimedia.length > 0){
-      imageUrl = `https://static01.nyt.com/${item.multimedia[0].url}`;
-    }else{
-      imageUrl = `https://via.placeholder.com/400x400?text=Image Not Found`;
+      imageUrl = {uri: `https://static01.nyt.com/${item.multimedia[0].url}`};
     }
+    
     return(
       <Card
         containerStyle={{ marginBottom: index === this.state.data.length - 1 ? 20 : 0 }}
         title={`${item.headline.main}`}
-        image={{uri: imageUrl}}>
+        image={imageUrl}>
         <Text style={{marginBottom: 10}}>
           {`${item.snippet}`}
         </Text>
