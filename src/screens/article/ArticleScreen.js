@@ -100,7 +100,7 @@ class ArticleScreen extends Component {
     if(item.multimedia.length > 0){
       imageUrl = {uri: `https://static01.nyt.com/${item.multimedia[0].url}`};
     }
-    
+
     return(
       <Card
         containerStyle={{ marginBottom: index === this.state.data.length - 1 ? 20 : 0 }}
@@ -190,6 +190,7 @@ class ArticleScreen extends Component {
         />
         {this.state.isLoading === false && this.state.data.length > 0 &&
           <FlatList
+            bounces={false}
             data={this.state.data}
             keyExtractor={(item, index) => `${index}`}
             renderItem={(data) => this.renderRow(data)}
