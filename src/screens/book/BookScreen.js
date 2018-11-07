@@ -94,7 +94,7 @@ class BookScreen extends Component {
         </Text>
         <Button
           onPress={() => this.detail(item.amazon_product_url)}
-          icon={{name: 'code'}}
+          icon={{name: 'shopping-cart'}}
           backgroundColor='#03A9F4'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
           title='Buy Now' />
