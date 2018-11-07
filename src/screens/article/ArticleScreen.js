@@ -73,7 +73,11 @@ class ArticleScreen extends Component {
 
   async detail(url){
     try{
-      await CustomTabs.openURL(url);
+      await CustomTabs.openURL(url, {
+        toolbarColor: Colors.PRIMARY_COLOR,
+        showPageTitle: true,
+        enableDefaultShare: true,
+      });
     }catch(error){
       Alert.alert('Whoops!', JSON.stringify(error));
     }
