@@ -10,7 +10,7 @@ Navigation.events().registerAppLaunchedListener(() => {
       stack: {
         children: [{
           component: {
-            name: 'SplashScreen',
+            name: 'HomeScreen',
           }
         }],
       }

@@ -1,6 +1,6 @@
 import { Navigation } from 'react-native-navigation';
-import SplashScreen from './screens/default/SplashScreen';
+import HomeScreen from './screens/home/HomeScreen';
 
 export function routes() {
-    Navigation.registerComponent('SplashScreen', () => SplashScreen);
+    Navigation.registerComponent('HomeScreen', () => HomeScreen);
 }
