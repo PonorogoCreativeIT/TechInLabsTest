@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Alert, FlatList, TouchableOpacity } from 'react-native';
-import { Card, ListItem, Button, SearchBar, ButtonGroup } from 'react-native-elements';
+import { View, Text, StyleSheet, Alert, FlatList } from 'react-native';
+import { Card, Button, ButtonGroup } from 'react-native-elements';
 import Axios from 'axios';
 import Spinner from 'react-native-spinkit';
 import { CustomTabs } from 'react-native-custom-tabs';
@@ -18,7 +18,6 @@ class BookScreen extends Component {
 
     this.state = {
       data: [],
-      keyword: '',
       selectedTypeIndex: 0,
       isLoading: false,
     };
