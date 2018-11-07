@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Alert, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Alert, FlatList, TouchableOpacity, AppState } from 'react-native';
 import { Card, ListItem, Button, SearchBar, ButtonGroup } from 'react-native-elements';
 import Axios from 'axios';
 import Spinner from 'react-native-spinkit';
@@ -28,19 +28,24 @@ class ArticleScreen extends Component {
   }
 
   componentDidMount(){
+    this.isComponentMounted = true;
     this.loadData(true);
+  }
+
+  componentWillUnmount() {
+    this.isComponentMounted = false;
   }
 
   async loadData(isReset = false){
     if(isReset){
-      await this.setState({
+      this.setStateData({
         data: [],
         page: 1,
         isLoading: true,
         isLoadingNextPage: true,
       });
     }else{
-      await this.setState({
+      this.setStateData({
         isLoadingNextPage: true,
         page: parseInt(this.state.page) + 1,
       });
@@ -48,13 +53,13 @@ class ArticleScreen extends Component {
     try{
       const response = await Axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${keyNYTimes}&q=${this.state.keyword}&sort=${(this.state.selectedSortIndex === 0 ? 'newest' : 'oldest')}&page=${this.state.page}`);
       const result = this.state.data.concat(response.data.response.docs);
-      this.setState({
+      this.setStateData({
         isLoading: false,
         isLoadingNextPage: false,
         data: result,
       });
     }catch(error){
-      this.setState({
+      this.setStateData({
         isLoading: false,
         isLoadingNextPage: false,
       });
@@ -75,7 +80,7 @@ class ArticleScreen extends Component {
   }
 
   searchData(keyword, direct = false){
-    this.setState({keyword});
+    this.setStateData({keyword});
     clearTimeout(this.state.timer)
     if(direct){
       this.loadData(true);
@@ -87,10 +92,16 @@ class ArticleScreen extends Component {
   }
 
   sortData(data){
-    this.setState({
+    this.setStateData({
       selectedSortIndex: data,
     });
     this.loadData(true);
+  }
+
+  setStateData(data){
+    if(this.isComponentMounted){
+      this.setState(data);
+    }
   }
 
   renderRow(data){
